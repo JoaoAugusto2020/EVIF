@@ -1,0 +1,26 @@
+header {
+    max-height: 200px;
+    background-color: #2F9E41;
+}
+
+.nav-link {
+    color: white;
+    text-align: center;
+}
+
+/* ALTERAR COR DO ICONE */
+/* .nav-link:hover, .nav-link>i>svg:hover {
+    color: #373435;
+    fill: #373435;
+} */
+
+i>svg {
+    width: 30px;
+    fill: white; /*currentColor*/
+}
+
+#logoEVIF {
+    height: 100px;
+    width: 150px;
+    object-fit: cover;
+}
