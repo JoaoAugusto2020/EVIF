@@ -1,26 +1,57 @@
+*, p {
+    font-size: small;
+}
+
+/* CABEÇALHO */
 header {
-    max-height: 200px;
+    height: auto;
     background-color: #2F9E41;
+    margin-bottom: 150px;
 }
 
 .nav-link {
+    margin: 10px;
     color: white;
     text-align: center;
 }
+.nav-link:hover {
+    color: white;
+}
+i>svg {
+    width: 25px;
+    fill: white; /*currentColor*/
+}
 
 /* ALTERAR COR DO ICONE */
-/* .nav-link:hover, .nav-link>i>svg:hover {
+/* .nav-link:hover .nav-link>i>svg:hover {
     color: #373435;
     fill: #373435;
 } */
-
-i>svg {
-    width: 30px;
-    fill: white; /*currentColor*/
-}
 
 #logoEVIF {
     height: 100px;
     width: 150px;
     object-fit: cover;
+}
+/* ##Alinhamento */
+.div-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: nowrap;
+}
+.div-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div-opcoes {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#titulo {
+    text-align: center;
+    font-size: xx-large;
 }
