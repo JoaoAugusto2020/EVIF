@@ -20,6 +20,6 @@
 
       <!-- <p id="errorMessage" style="color: red; display: none">Usuário ou senha inválidos</p> -->
       <p class="text-center">Não possui uma conta?<br>
-      <a href="index.php?fun=signup" class="link">Cadastre-se aqui</a></p>
+      <a href="usuario.php?fun=signup" class="link">Cadastre-se aqui</a></p>
     </form>
   </div>

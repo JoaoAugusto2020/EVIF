@@ -18,6 +18,6 @@
       
       <!-- <p id="errorMessage" style="color: red; display: none">Usuário ou senha inválidos</p> </p> -->
       <p class="text-center">Já possui uma conta?<br>
-      <a href="index.php?fun=signin" class="link">Entre aqui</a></p>
+      <a href="usuario.php?fun=signin" class="link">Entre aqui</a></p>
     </form>  
   </div>
