@@ -1,0 +1,22 @@
+.btn-faixa {
+  background-color: #373435;
+  padding: 30px 0px;
+}
+.btn-custom {
+  background-color: #2F9E41;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  text-decoration: none;
+
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0px 10px;
+  font-size: 18px;
+}
+.btn-custom:hover {
+  background-color: #1c852e;
+}
+.btn-custom:active {
+  background-color: #106d1f;
+}
