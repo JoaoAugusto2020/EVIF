@@ -11,7 +11,8 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="visao/css/index.css"/>
 	<link rel="stylesheet" href="visao/css/home.css"/>
-	<link rel="stylesheet" href="visao/css/login.css"/>
+	<link rel="stylesheet" href="visao/css/sobre.css"/>
+	<link rel="stylesheet" href="visao/css/forms.css"/>
 
 	<!-- JS -->
 	<!-- Bootrstrap JS -->
@@ -23,6 +24,7 @@
 	<!-- Próprio -->
 	<script src="visao/js/home.js"></script>
 	<script src="visao/js/login.js"></script>
+	<script src="visao/js/config.js"></script>
 
 </head>
 <body>
@@ -95,11 +97,16 @@
 						</a>
 
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Entrar / Registrar</a></li>
-							<li><a class="dropdown-item" href="#">Configurações</a></li>
-							<li><a class="dropdown-item" href="#">Sobre nós</a></li>
-							<li><a class="dropdown-item" href="#">Área do Professor</a></li>
-							<li><a class="dropdown-item" href="#">Área Administrativa</a></li>
+							<?php 
+							if(isset($_SESSION["usuario"]))
+								echo "<li><a class='dropdown-item' href='usuario.php?fun=signout'>Sair da conta</a></li>";
+							else
+								echo "<li><a class='dropdown-item' href='usuario.php?fun=signin'>Entrar/Registrar</a></li>";
+							?>
+							<li><a class="dropdown-item" href="usuario.php?fun=update">Configurações</a></li>
+							<li><a class="dropdown-item" href="index.php?fun=sobre">Sobre nós</a></li>
+							<li><a class="dropdown-item" href="index.php?fun=prof">Área do Professor</a></li>
+							<li><a class="dropdown-item" href="index.php?fun=adm">Área Administrativa</a></li>
 						</ul>
 					</div>
 				</div>

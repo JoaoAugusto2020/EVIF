@@ -1,14 +1,6 @@
 <h1 class="titulo">Usuários</h1>
 
-<?php
-  if (isset($status)) {
-    echo "<H2>" . $status . "</H2>";
-    echo "<br><br>";
-  }
-  //Se $status está preenchida, imprimir ela
-?>
-
-<p class="centralizado"><a class="link-escuro" href="usuario.php?fun=cadastrar">Cadastrar</a></p>
+<p class="centralizado"><a class="link-escuro" href="usuario.php?fun=signup">Cadastrar</a></p>
 <div class="centralizar-div">
   <!-- <button id="tabelaOlho">
       <img src="visao/imagens/icones/olho-aberto.png" width="20px" height="20px">

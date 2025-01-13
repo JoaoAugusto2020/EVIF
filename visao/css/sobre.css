@@ -1,0 +1,11 @@
+.sobreFoto-card{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sobreFoto {
+  height: 250px;
+  width: 250px;
+  background-color: gray;
+}

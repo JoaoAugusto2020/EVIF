@@ -14,8 +14,8 @@ class UsuarioDAO{
 		$this->con = $conF->getConnection();
 	}
 
-	//cadastrar
-	public function cadastrar($usuario){
+	//create
+	public function cadastrar($u){
 		try {
 			$stmt = $this->con->prepare(
 				"INSERT INTO usuario(nome, email, senha, nivel)
@@ -24,12 +24,16 @@ class UsuarioDAO{
 			//:nome - é uma âncora e será ligado pelo bindValue
 			//SQL injection
 			//ligamos as âncoras aos valores de veiculo
-      $stmt->bindValue(":nome", $usuario->getNome());
-			$stmt->bindValue(":email", $usuario->getEmail());
-			$stmt->bindValue(":senha", $usuario->getSenha());
-			$stmt->bindValue(":nivel", $usuario->getNivel());
+      $stmt->bindValue(":nome", $u->getNome());
+			$stmt->bindValue(":email", $u->getEmail());
+			$stmt->bindValue(":senha", $u->getSenha());
+			$stmt->bindValue(":nivel", $u->getNivel());
 
-			$stmt->execute(); //execução do SQL	
+			$stmt->execute(); //execução do SQL
+
+			$nome = $u->getNome();
+			echo "<script>alert('Usuário  '.mb_strtoupper($nome, 'UTF-8').' cadastrado com sucesso!');";
+			
 			/*$this->con->close();
 				$this->con = null;*/
 		} catch (PDOException $ex) {
@@ -37,7 +41,7 @@ class UsuarioDAO{
 		}
 	}
 
-	//alterar
+	//update
 	public function alterar($usuario){
 		try {
 			$stmt = $this->con->prepare(
@@ -59,6 +63,7 @@ class UsuarioDAO{
 			$this->con->beginTransaction();
 			$stmt->execute(); //execução do SQL	
 			$this->con->commit();
+
 			/*$this->con->close();
 				$this->con = null;*/
 		} catch (PDOException $ex) {
@@ -66,7 +71,7 @@ class UsuarioDAO{
 		}
 	}
 
-	//excluir
+	//delete
 	public function excluir($usuario){
 		try {
 			$num = $this->con->exec("DELETE FROM usuario WHERE idusuario = " . $usuario->getIdusuario());
@@ -77,12 +82,15 @@ class UsuarioDAO{
 			} else {
 				return 0;
 			}
+
+			/*$this->con->close();
+				$this->con = null;*/
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
 	}
 
-	//listar
+	//read
 	public function listar($query = null){
 		//se não recebe parâmetro (ou seja, uma consulto personalizada)
 		//$query recebe nulo
@@ -116,6 +124,40 @@ class UsuarioDAO{
 			}
 			return $lista;
 			
+			/*$this->con->close();
+				$this->con = null;*/
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
+	//signin 
+	public function signin($u){
+		try {
+			$email = $u->getEmail();
+			$lista = $this->con->query("SELECT senha, idusuario FROM usuario WHERE email='$email'");
+
+			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
+			$erro = 0;
+
+			if(count($dado) == 0){
+				echo "<script>alert('Este email não pertence à nenhum usuário!');</script>";
+				$erro++;
+			}else{
+				if($dado[0]["senha"] == $u->getSenha()){
+					if(!isset($_SESSION)) session_start();
+					$_SESSION["usuario"] = $dado[0]["idusuario"];
+					echo "<script>alert('Usuário logado com sucesso!');</script>";
+				}else{
+					echo "<script>alert('Senha inválida!');</script>";
+					$erro++;
+				}
+			}
+			
+			return $erro;
+
+			/*$this->con->close();
+				$this->con = null;*/
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
@@ -124,11 +166,7 @@ class UsuarioDAO{
 	//exibir 
 	public function exibir($idusuario){
 		try {
-			$lista = $this->con->query("SELECT * FROM usuario WHERE idusuario = " . $idusuario);
-
-			/*$this->con->close();
-				$this->con = null;*/
-
+			$lista = $this->con->query("SELECT * FROM usuario WHERE idusuario = " .$idusuario);
 			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
 
 			$u = new Usuario();
@@ -140,6 +178,9 @@ class UsuarioDAO{
 			$u->setDatacriacao($dado[0]["datacriacao"]);
 
 			return $u;
+
+			/*$this->con->close();
+				$this->con = null;*/
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}

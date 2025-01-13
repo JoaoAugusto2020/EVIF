@@ -12,6 +12,10 @@
     color: #373435;
     font-size: 2vw;
 }
+.paragrafo-unico {
+    font-size: 1.5vw;
+    margin: 10px 100px;
+}
 p {
     font-size: medium;
 }
@@ -43,6 +47,9 @@ p {
 .link-escuro:hover {
     color: white;
     transition: 200ms;
+}
+.btn-full {
+    width: 100%;
 }
 /** Alinhamento */
 .centralizar-div {

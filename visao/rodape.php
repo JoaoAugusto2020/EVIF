@@ -10,12 +10,13 @@
 				<div class="col-md-4">
 					<h2>Mapa do Site</h2>
 					<ul>
-						<li><a href="#" class="link-claro">Publicações</a></li>
-						<li><a href="#" class="link-claro">Minhas inscrições</a></li>
-						<li><a href="#" class="link-claro">Minha conta</a></li>
-						<li><a href="#" class="link-claro">Notificações</a></li>
-						<li><a href="#" class="link-claro">Sobre nós</a></li>
-						<li><a href="#" class="link-claro">Área administrativa</a></li>
+						<li><a href="index.php" class="link-claro">Publicações</a></li>
+						<li><a href="index.php?fun=inscricoes" class="link-claro">Minhas inscrições</a></li>
+						<li><a href="usuario.php?fun=update" class="link-claro">Configurações</a></li>
+						<li><a href="index.php?fun=notificacoes" class="link-claro">Notificações</a></li>
+						<li><a href="index.php?fun=sobre" class="link-claro">Sobre nós</a></li>
+						<li><a href="index.php?fun=prof" class="link-claro">Área do Professor</a></li>
+						<li><a href="index.php?fun=adm" class="link-claro">Área administrativa</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4">

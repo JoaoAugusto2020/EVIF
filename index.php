@@ -4,19 +4,24 @@ session_start(); //Inicia a sessão
 //carrinho de compras, seus dados de conexão
 //qualquer variável que vc queira criar
 include_once("visao/cabecalho.php");
+include_once("controle/protecao.php");
 
 if(isset($_GET["fun"])){
 	$fun = $_GET["fun"];
 	
-	if($fun == "adm"){		
-		include_once("visao/paginas/adm.html");	
-	} else if($fun == "entrar"){
-		include_once("visao/paginas/entrar.html");
-	} else if($fun == "sobre"){
+	if($fun == "sobre"){
 		include_once("visao/paginas/sobre.html");
-	}else {
-		include_once("visao/paginas/home.html");		
 
+	} else if($fun == "prof"){
+		proteger();
+		include_once("visao/paginas/prof.html");
+
+	} else if($fun == "adm"){
+		proteger();
+		include_once("visao/paginas/adm.html");
+
+	} else {
+		include_once("visao/paginas/erropage.html");		
 	}
 } else {
 	include_once("visao/paginas/home.html");

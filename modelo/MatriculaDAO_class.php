@@ -120,17 +120,15 @@ class MatriculaDAO{
 	public function exibir($idusuario, $idcurso){
 		try {
 			$lista = $this->con->query("SELECT * FROM matricula WHERE idusuario = " .$idusuario. " AND idcurso = " .$idcurso);
-
-			/*$this->con->close();
-				$this->con = null;*/
-
 			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
 
+			if(count($dado) == 0) return;
+
 			$m = new Matricula();
-			$m->setIdusuario($dado[0]["idusuario"]);
-			$m->setIdcurso($dado[0]["idcurso"]);
-			$m->setMatricula($dado[0]["matricula"]);
-			$m->setPeriodo($dado[0]["periodo"]);
+			$m->setIdusuario($dado["idusuario"]);
+			$m->setIdcurso($dado["idcurso"]);
+			$m->setMatricula($dado["matricula"]);
+			$m->setPeriodo($dado["periodo"]);
 
 			return $m;
 		} catch (PDOException $ex) {
