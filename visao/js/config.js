@@ -5,8 +5,10 @@ $(function () {
   function curso() {
     if($("#nivelAluno").is(':checked')){
       $("#displaycurso").css("display", "block");
-    }else{
+      $("#displayMatricula").css("display", "block");
+    } else {
       $("#displaycurso").css("display", "none");
+      $("#displayMatricula").css("display", "none");
     }
   };
 

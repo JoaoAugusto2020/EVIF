@@ -18,15 +18,16 @@ class AbertocursosDAO{
 	public function cadastrar($abertocursos){
 		try {
 			$stmt = $this->con->prepare(
-				"INSERT INTO abertocursos(idatividade, idcurso, periodo)
-				VALUES (:idatividade, :idcurso, :periodo)"
+				"INSERT INTO abertocursos(curso, titulo)
+				VALUES (:curso, :titulo)"
 			);
 			//:abertocursos - é uma âncora e será ligado pelo bindValue
 			//SQL injection
 			//ligamos as âncoras aos valores de veiculo
-			$stmt->bindValue(":idatividade", $abertocursos->getIdatividade());
-			$stmt->bindValue(":idcurso", $abertocursos->getIdcurso());
-			$stmt->bindValue(":periodo", $abertocursos->getPeriodo());
+
+			//$stmt->bindValue(":idatividade", $abertocursos->getIdatividade());
+			$stmt->bindValue(":curso", $abertocursos->getCurso());
+			$stmt->bindValue(":titulo", $abertocursos->getTitulo());
 
 			$stmt->execute(); //execução do SQL	
 			/*$this->con->close();
@@ -40,15 +41,16 @@ class AbertocursosDAO{
 	public function alterar($abertocursos){
 		try {
 			$stmt = $this->con->prepare(
-				"UPDATE abertocursos SET 
-        periodo=:periodo WHERE
-				idatividade=:idatividade AND idcurso=:idcurso"
+				"UPDATE abertocursos SET
+				curso=:curso, 
+        titulo=:titulo WHERE
+				idatividadecurso=:idatividadecurso"
 			);
 
 			//ligamos as âncoras aos valores de abertocursos
-      $stmt->bindValue(":idatividade", $abertocursos->getIdatividade());
-			$stmt->bindValue(":idcurso", $abertocursos->getIdcurso());
-      $stmt->bindValue(":periodo", $abertocursos->getPeriodo());
+      $stmt->bindValue(":idatividadecurso", $abertocursos->getIdatividadecurso());
+			$stmt->bindValue(":curso", $abertocursos->getCurso());
+      $stmt->bindValue(":titulo", $abertocursos->getTitulo());
 
 			$this->con->beginTransaction();
 			$stmt->execute(); //execução do SQL	
@@ -63,7 +65,7 @@ class AbertocursosDAO{
 	//excluir
 	public function excluir($abertocursos){
 		try {
-			$num = $this->con->exec("DELETE FROM abertocursos WHERE idatividade = " .$abertocursos->getIdatividade(). " AND idcurso = " .$abertocursos->getIdcurso());
+			$num = $this->con->exec("DELETE FROM abertocursos WHERE idatividadecurso = " .$abertocursos->getIdatividadecurso());
 			//numero de linhas afetadas pelo comando
 
 			if ($num >= 1) {
@@ -100,9 +102,9 @@ class AbertocursosDAO{
 				//percorre linha a linha de dados e coloca cada registro
 				//na variável linha (que é um vetor)
 				$a = new Abertocursos();
-				$a->setIdatividade($linha["idatividade"]);
-        $a->setIdcurso($linha["idcurso"]);
-				$a->setPeriodo($linha["periodo"]);
+				$a->setIdatividadecurso($linha["idatividadecurso"]);
+        $a->setCurso($linha["curso"]);
+				$a->setTitulo($linha["titulo"]);
 				$lista[] = $a;
 			}
 			return $lista;
@@ -113,9 +115,9 @@ class AbertocursosDAO{
 	}
 
 	//exibir 
-	public function exibir($idatividade, $idcurso){
+	public function exibir($idatividadecurso, $curso){
 		try {
-			$lista = $this->con->query("SELECT * FROM abertocursos WHERE idatividade = " .$idatividade. " AND idcurso = " .$idcurso);
+			$lista = $this->con->query("SELECT * FROM abertocursos WHERE idatividadecurso = " .$idatividadecurso);
 
 			/*$this->con->close();
 				$this->con = null;*/
@@ -123,9 +125,9 @@ class AbertocursosDAO{
 			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
 
 			$a = new Abertocursos();
-			$a->setIdatividade($dado[0]["idatividade"]);
-			$a->setIdcurso($dado[0]["idcurso"]);
-			$a->setPeriodo($dado[0]["periodo"]);
+			$a->setIdatividadecurso($dado[0]["idatividadecurso"]);
+			$a->setCurso($dado[0]["curso"]);
+			$a->setTitulo($dado[0]["titulo"]);
 
 			return $a;
 		} catch (PDOException $ex) {

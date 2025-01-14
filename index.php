@@ -24,10 +24,8 @@ if(isset($_GET["fun"])){
 		include_once("visao/paginas/erropage.html");		
 	}
 } else {
-	include_once("visao/paginas/home.html");
+	include_once("visao/paginas/home.php");
 }
 
-//atribuição de responsabilidade
-//o controle sabe como exibir a lista de veiculos
 include_once("visao/rodape.php");
 ?>

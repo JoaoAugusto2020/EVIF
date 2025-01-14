@@ -29,7 +29,9 @@ class CursoDAO{
 
 			$stmt->execute(); //execução do SQL	
 			/*$this->con->close();
-				$this->con = null;*/
+			$this->con = null;*/
+
+			// echo "<script>alert('Curso criada com sucesso!');</script>";
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}

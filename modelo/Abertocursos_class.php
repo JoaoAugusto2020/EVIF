@@ -1,38 +1,38 @@
 <?php
 class Abertocursos {
   //classe entidade	
-  private $idatividade;
-  private $idcurso;
-  private $periodo;
+  private $idatividadecurso;
+  private $curso;
+  private $titulo;
 
 	public function __construct() {}
 
-  public function getIdatividade(){
-    return $this->idatividade;
+  public function getIdatividadecurso(){
+    return $this->idatividadecurso;
   }
 
-  public function setIdatividade($idatividade){
-    $this->idatividade = $idatividade;
+  public function setIdatividadecurso($idatividadecurso){
+    $this->idatividadecurso = $idatividadecurso;
 
     return $this;
   }
 
-  public function getIdcurso(){
-    return $this->idcurso;
+  public function getCurso(){
+    return $this->curso;
   }
 
-  public function setIdcurso($idcurso){
-    $this->idcurso = $idcurso;
+  public function setCurso($curso){
+    $this->curso = $curso;
 
     return $this;
   }
 
-  public function getPeriodo(){
-    return $this->periodo;
+  public function getTitulo(){
+    return $this->titulo;
   }
 
-  public function setPeriodo($periodo){
-    $this->periodo = $periodo;
+  public function setTitulo($titulo){
+    $this->titulo = $titulo;
 
     return $this;
   }

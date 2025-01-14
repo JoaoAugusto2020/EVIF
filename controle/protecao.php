@@ -52,10 +52,11 @@ if(!function_exists("protegerAdmin")){
       $dao = new UsuarioDAO();
       $u = $dao->exibir($_SESSION["usuario"]);
 
-      if($u->getNivel()!=1){
+      $nivel = $u->getNivel();
+      if($nivel!=1){
         echo '<script>'; 
         echo 'alert("Página restrita para o Administrador!");'; 
-        echo "javascript:history.go(-1);>";
+        echo "javascript:history.go(-1);";
         echo '</script>';
       }
     }

@@ -4,27 +4,25 @@ include_once("modelo/MatriculaDAO_class.php");
 class DeleteMatricula{
 
 	public function __construct(){
-    $dao = new MatriculaDAO();
+    if (isset($_GET["conf"])){
+			if ($_GET["conf"] == "sim"){
+				//enviar é o botão de submit
+        
+        $m = new Matricula();
+				$m->setMatricula($_GET["matricula"]);
 
-    if($dao->existe($_GET["matricula"])){    
-      if (isset($_GET["conf"])){
-        if ($_GET["conf"] == "sim"){
-          //enviar é o botão de submit
+        $dao = new MatriculaDAO();
+				$dao->excluir($m);
 
-          $dao2 = new MatriculaDAO();
-          $dao2->excluir($_GET["matricula"]);
+        echo "<script>javascript:history.go(-2);</script>";
+			}
+		} else {
+			//encaminhar para a página de confirmação de exclusão
 
-          echo "<script>javascript:history.go(-2);</script>";
-        }
-      } else {
-        //encaminhar para a página de confirmação de exclusão
+			$m = new Matricula();
+			$m->setMatricula($_POST["delmatricula"]);
 
-        include_once("visao/matricula/confirmDelete.php");
-      }
-      
-    } else {
-      echo "<script>alert('Essa matricula não existe!');</script>";
-      echo "<script>javascript:history.go(-1);</script>";
-    }
+			include_once("visao/matricula/confirmDelete.php");
+		}
   }
 }

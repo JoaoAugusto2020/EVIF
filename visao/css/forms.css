@@ -56,3 +56,13 @@ input {
   height: 20px;
   padding: 3px 10px;
 }
+
+.form {
+  width: 30%;
+}
+.form-label {
+  margin-bottom: 0px;
+}
+.form-control, .form-check-input, .form-check-input {
+  border: 1px solid black;
+}

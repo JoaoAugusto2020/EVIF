@@ -20,6 +20,22 @@ p {
     font-size: medium;
 }
 
+/** Tabela */
+.tabela {
+    border-collapse: collapse;
+    text-align: center;
+}
+.tabela, .tabela th, .tabela td{
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+.tabela th {
+    background-color: #2F9E41;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
 /** Links */
 .link {
     color: #373435;

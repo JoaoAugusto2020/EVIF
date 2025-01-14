@@ -4,7 +4,6 @@ class Matricula {
   private $idusuario;
   private $idcurso;
   private $matricula;
-  private $periodo;
 
 	public function __construct() {}
 
@@ -34,16 +33,6 @@ class Matricula {
 
   public function setMatricula($matricula){
     $this->matricula = $matricula;
-
-    return $this;
-  }
-
-  public function getPeriodo(){
-    return $this->periodo;
-  }
-
-  public function setPeriodo($periodo){
-    $this->periodo = $periodo;
 
     return $this;
   }

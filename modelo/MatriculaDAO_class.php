@@ -18,8 +18,8 @@ class MatriculaDAO{
 	public function cadastrar($matricula){
 		try {
 			$stmt = $this->con->prepare(
-				"INSERT INTO matricula(idusuario, idcurso, matricula, periodo)
-				VALUES (:idusuario, :idcurso, :matricula, :periodo)"
+				"INSERT INTO matricula(idusuario, idcurso, matricula)
+				VALUES (:idusuario, :idcurso, :matricula)"
 			);
 			//:matricula - é uma âncora e será ligado pelo bindValue
 			//SQL injection
@@ -27,11 +27,12 @@ class MatriculaDAO{
 			$stmt->bindValue(":idusuario", $matricula->getIdusuario());
 			$stmt->bindValue(":idcurso", $matricula->getIdcurso());
       $stmt->bindValue(":matricula", $matricula->getMatricula());
-			$stmt->bindValue(":periodo", $matricula->getPeriodo());
 
 			$stmt->execute(); //execução do SQL	
 			/*$this->con->close();
 				$this->con = null;*/
+
+			echo "<script>alert('Matricula cadastrada com sucesso!');</script>";
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
@@ -42,8 +43,7 @@ class MatriculaDAO{
 		try {
 			$stmt = $this->con->prepare(
 				"UPDATE matricula SET 
-				matricula=:matricula,
-        periodo=:periodo WHERE
+				matricula=:matricula WHERE
 				idusuario=:idusuario AND idcurso=:idcurso"
 			);
 
@@ -51,7 +51,6 @@ class MatriculaDAO{
       $stmt->bindValue(":idusuario", $matricula->getIdusuario());
 			$stmt->bindValue(":idcurso", $matricula->getIdcurso());
       $stmt->bindValue(":matricula", $matricula->getMatricula());
-      $stmt->bindValue(":periodo", $matricula->getPeriodo());
 
 			$this->con->beginTransaction();
 			$stmt->execute(); //execução do SQL	
@@ -66,14 +65,19 @@ class MatriculaDAO{
 	//excluir
 	public function excluir($matricula){
 		try {
-			$num = $this->con->exec("DELETE FROM matricula WHERE matricula=" .$matricula->getMatricula(). " AND idusuario=" .$_SESSION["usuario"]);
-			//numero de linhas afetadas pelo comando
+			$stmt = $this->con->prepare(
+				"DELETE FROM matricula WHERE 
+				matricula=:matricula AND idusuario=:idusuario"
+			);
 
-			if($num > 0){
-				echo "<script>alert('Excluido com sucesso!');</script>";
-			} else {
-				echo "<script>alert('Essa matricula não pertence a você!');</script>";
-			}
+      $stmt->bindValue(":idusuario", $_SESSION['usuario']);
+      $stmt->bindValue(":matricula", $matricula->getMatricula());
+
+			$this->con->beginTransaction();
+			$stmt->execute(); //execução do SQL	
+			$this->con->commit();
+
+			echo "<script>alert('Excluido com sucesso!');</script>";
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
@@ -106,7 +110,6 @@ class MatriculaDAO{
 				$m->setIdusuario($linha["idusuario"]);
         $m->setIdcurso($linha["idcurso"]);
 				$m->setMatricula($linha["matricula"]);
-				$m->setPeriodo($linha["periodo"]);
 				$lista[] = $m;
 			}
 			return $lista;
@@ -129,7 +132,6 @@ class MatriculaDAO{
 				$m->setIdusuario($linha["idusuario"]);
         $m->setIdcurso($linha["idcurso"]);
 				$m->setMatricula($linha["matricula"]);
-				$m->setPeriodo($linha["periodo"]);
 				$lista[] = $m;
 			}
 			
@@ -146,6 +148,14 @@ class MatriculaDAO{
 			$dados = $this->con->query("SELECT * FROM matricula WHERE matricula = ".$matricula);
 			$lista = array();
 			
+			foreach ($dados as $linha){
+				$m = new Matricula();
+				$m->setIdusuario($linha["idusuario"]);
+        $m->setIdcurso($linha["idcurso"]);
+				$m->setMatricula($linha["matricula"]);
+				$lista[] = $m;
+			}
+
 			if(count($lista) > 0) return true;
 			else return false;
 			

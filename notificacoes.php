@@ -7,20 +7,20 @@ if(isset($_GET["fun"])){
 	$fun = $_GET["fun"];
 	
 	if($fun == "create"){
-		include_once("controle/matricula/CreateMatricula_class.php");
-		$pag = new CreateMatricula();
+		include_once("controle/notificacoes/CreateNotificacoes_class.php");
+		//$pag = new CreateNotificacoes();
 
 	} else if($fun == "list"){
-		include_once("controle/matricula/ListMatricula_class.php");
-		//$pag = new ListMatricula();
+		include_once("controle/notificacoes/ListNotificacoes_class.php");
+		//$pag = new ListNotificacoes();
 
 	} else if($fun == "update"){
-		include_once("controle/matricula/UpdateMatricula_class.php");
-		//$pag = new UpdateMatricula();
+		include_once("controle/notificacoes/UpdateNotificacoes_class.php");
+		//$pag = new UpdateNotificacoes();
 
 	} else if($fun == "delete"){
-		include_once("controle/matricula/DeleteMatricula_class.php");
-		$pag = new DeleteMatricula();
+		include_once("controle/notificacoes/DeleteNotificacoes_class.php");
+		//$pag = new DeleteNotificacoes();
 
 	} else {
 		include_once("visao/paginas/erropage.html");		

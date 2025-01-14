@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 07-Jan-2025 às 20:57
+-- Generation Time: 14-Jan-2025 às 11:34
 -- Versão do servidor: 5.7.25
 -- versão do PHP: 7.1.26
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bd_evif`
 --
+CREATE DATABASE IF NOT EXISTS `bd_evif` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bd_evif`;
 
 -- --------------------------------------------------------
 
@@ -28,18 +30,15 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `abertocursos`
 --
 
+DROP TABLE IF EXISTS `abertocursos`;
 CREATE TABLE `abertocursos` (
-  `idatividade` int(11) NOT NULL,
-  `idcurso` int(11) NOT NULL,
-  `periodo` int(11) NOT NULL
+  `idatividadecurso` int(11) NOT NULL,
+  `curso` varchar(100) NOT NULL,
+  `titulo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- RELATIONSHIPS FOR TABLE `abertocursos`:
---   `idatividade`
---       `atividade` -> `idatividade`
---   `idcurso`
---       `curso` -> `idcurso`
 --
 
 -- --------------------------------------------------------
@@ -48,6 +47,7 @@ CREATE TABLE `abertocursos` (
 -- Estrutura da tabela `atividade`
 --
 
+DROP TABLE IF EXISTS `atividade`;
 CREATE TABLE `atividade` (
   `idatividade` int(11) NOT NULL,
   `tipo` varchar(10) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `atividade` (
   `local` varchar(50) NOT NULL,
   `datainicio` date NOT NULL,
   `datafim` date NOT NULL,
-  `aberto` int(11) DEFAULT NULL
+  `aberto` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `atividade` (
 -- Estrutura da tabela `curso`
 --
 
+DROP TABLE IF EXISTS `curso`;
 CREATE TABLE `curso` (
   `idcurso` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -86,6 +87,7 @@ CREATE TABLE `curso` (
 -- Estrutura da tabela `inscricao`
 --
 
+DROP TABLE IF EXISTS `inscricao`;
 CREATE TABLE `inscricao` (
   `idatividade` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
@@ -106,19 +108,55 @@ CREATE TABLE `inscricao` (
 -- Estrutura da tabela `matricula`
 --
 
+DROP TABLE IF EXISTS `matricula`;
 CREATE TABLE `matricula` (
-  `idusuario` int(11) NOT NULL,
-  `idcurso` int(11) NOT NULL,
   `matricula` varchar(13) NOT NULL,
-  `periodo` int(11) NOT NULL
+  `idusuario` int(11) NOT NULL,
+  `idcurso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- RELATIONSHIPS FOR TABLE `matricula`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `notificacao`
+--
+
+DROP TABLE IF EXISTS `notificacao`;
+CREATE TABLE `notificacao` (
+  `idnotificacao` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `texto` text NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELATIONSHIPS FOR TABLE `notificacao`:
 --   `idusuario`
 --       `usuario` -> `idusuario`
---   `idcurso`
---       `curso` -> `idcurso`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `solicitacao`
+--
+
+DROP TABLE IF EXISTS `solicitacao`;
+CREATE TABLE `solicitacao` (
+  `idsolicitacao` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `nivel` int(1) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELATIONSHIPS FOR TABLE `solicitacao`:
+--   `idusuario`
+--       `usuario` -> `idusuario`
 --
 
 -- --------------------------------------------------------
@@ -127,18 +165,29 @@ CREATE TABLE `matricula` (
 -- Estrutura da tabela `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idusuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `senha` varchar(32) NOT NULL,
-  `nivel` int(1) NOT NULL,
+  `nivel` int(1) DEFAULT '0',
   `datacriacao` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- RELATIONSHIPS FOR TABLE `usuario`:
 --
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`idusuario`, `nome`, `email`, `senha`, `nivel`, `datacriacao`) VALUES
+(4, 'João Augusto Marciano Silva', 'joao@gmail.com', '123', 0, '2025-01-07 16:46:07'),
+(7, 'admin', 'admin@gmail.com', 'admin', 1, '2025-01-07 20:55:23'),
+(8, 'prof', 'prof@gmail.com', 'prof', 2, '2025-01-14 01:09:17'),
+(9, 'aluno', 'aluno@gmail.com', 'aluno', 0, '2025-01-14 01:10:14');
 
 --
 -- Indexes for dumped tables
@@ -148,8 +197,7 @@ CREATE TABLE `usuario` (
 -- Indexes for table `abertocursos`
 --
 ALTER TABLE `abertocursos`
-  ADD PRIMARY KEY (`idatividade`,`idcurso`),
-  ADD KEY `idcurso` (`idcurso`);
+  ADD PRIMARY KEY (`idatividadecurso`);
 
 --
 -- Indexes for table `atividade`
@@ -168,14 +216,27 @@ ALTER TABLE `curso`
 --
 ALTER TABLE `inscricao`
   ADD PRIMARY KEY (`idatividade`,`idusuario`),
-  ADD KEY `idusuario` (`idusuario`);
+  ADD KEY `inscricao_ibfk_2` (`idusuario`);
 
 --
 -- Indexes for table `matricula`
 --
 ALTER TABLE `matricula`
-  ADD PRIMARY KEY (`idusuario`,`idcurso`),
-  ADD KEY `idcurso` (`idcurso`);
+  ADD PRIMARY KEY (`matricula`);
+
+--
+-- Indexes for table `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD PRIMARY KEY (`idnotificacao`),
+  ADD KEY `fk_idusuario_notificacao` (`idusuario`);
+
+--
+-- Indexes for table `solicitacao`
+--
+ALTER TABLE `solicitacao`
+  ADD PRIMARY KEY (`idsolicitacao`),
+  ADD KEY `idusuario` (`idusuario`);
 
 --
 -- Indexes for table `usuario`
@@ -186,6 +247,12 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `abertocursos`
+--
+ALTER TABLE `abertocursos`
+  MODIFY `idatividadecurso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `atividade`
@@ -200,35 +267,45 @@ ALTER TABLE `curso`
   MODIFY `idcurso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `notificacao`
+--
+ALTER TABLE `notificacao`
+  MODIFY `idnotificacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `solicitacao`
+--
+ALTER TABLE `solicitacao`
+  MODIFY `idsolicitacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `abertocursos`
---
-ALTER TABLE `abertocursos`
-  ADD CONSTRAINT `abertocursos_ibfk_1` FOREIGN KEY (`idatividade`) REFERENCES `atividade` (`idatividade`),
-  ADD CONSTRAINT `abertocursos_ibfk_2` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`);
-
---
 -- Limitadores para a tabela `inscricao`
 --
 ALTER TABLE `inscricao`
-  ADD CONSTRAINT `inscricao_ibfk_1` FOREIGN KEY (`idatividade`) REFERENCES `atividade` (`idatividade`),
-  ADD CONSTRAINT `inscricao_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`);
+  ADD CONSTRAINT `inscricao_ibfk_1` FOREIGN KEY (`idatividade`) REFERENCES `atividade` (`idatividade`) ON DELETE CASCADE,
+  ADD CONSTRAINT `inscricao_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `matricula`
+-- Limitadores para a tabela `notificacao`
 --
-ALTER TABLE `matricula`
-  ADD CONSTRAINT `matricula_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`),
-  ADD CONSTRAINT `matricula_ibfk_2` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`);
+ALTER TABLE `notificacao`
+  ADD CONSTRAINT `fk_idusuario_notificacao` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE;
+
+--
+-- Limitadores para a tabela `solicitacao`
+--
+ALTER TABLE `solicitacao`
+  ADD CONSTRAINT `solicitacao_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

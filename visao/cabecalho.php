@@ -26,6 +26,7 @@
 	<script src="visao/js/home.js"></script>
 	<script src="visao/js/login.js"></script>
 	<script src="visao/js/config.js"></script>
+	<script src="visao/js/atividade.js"></script>
 
 </head>
 <body>
