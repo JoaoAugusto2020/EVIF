@@ -56,3 +56,4 @@ if(isset($_GET["fun"])){
 }
 
 include_once("visao/rodape.php");
+?>
