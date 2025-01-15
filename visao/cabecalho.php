@@ -67,7 +67,7 @@
 					</div>
 
 					<!-- Notificações -->
-					<div class="nav-item">
+					<!-- <div class="nav-item">
 						<a class="link-claro" href="#">
 							<i><svg xmlns="http://www.w3.org/2000/svg" class="nav-svg bi bi-bell-fill" fill="currentColor"
 									viewBox="0 0 16 16">
@@ -77,7 +77,7 @@
 							<br />
 							Notificações
 						</a>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- Logo -->
