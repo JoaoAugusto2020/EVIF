@@ -3,17 +3,17 @@
   <div class="espaco-sm"></div>
 
   <div class="container centralizar-div">
-    <form class="form-entrar" action="usuario.php?fun=signin" method="POST" enctype="multipart/form-data">
+    <form class="" action="usuario.php?fun=signin" method="POST" enctype="multipart/form-data">
 
       <input class="input" type="text" name="email" placeholder="E-mail" required> <br>
 
-      <div class="input-senha mb-3">
+      <div class="input-senha mb-1">
           <input type="password" name="senha" id="senha" placeholder="Senha" required/>
           <img src="visao/img/icones/olho-aberto.png" id="olho" alt="olho">
       </div>
       
-      <!-- <a href="index.php?fun=recuperarsenha" class="link">Esqueci minha senha</a>
-      <br><br> -->
+      <a href="usuario.php?fun=resetSenha" class="link">Esqueci minha senha</a>
+      <br><br>
 
       <button class="btn btn-success btn-full" type="submit" name="enviar" value="enviar">Entrar</button> <br><br>
 

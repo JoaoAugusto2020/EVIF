@@ -16,6 +16,7 @@
       <div class="text-center">
         <button class="btn btn-success" type="submit" name="enviar" value="enviar">Cadastrar</button>
         <button class="btn btn-danger" type="reset" value="cancelar">Cancelar</button>
+        <a class="btn btn-secondary" href="curso.php?fun=list">Voltar</a>
       </div>
     </form>  
   </div>

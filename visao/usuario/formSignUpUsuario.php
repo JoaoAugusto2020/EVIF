@@ -3,7 +3,7 @@
   <div class="espaco-sm"></div>
 
   <div class="container centralizar-div">
-    <form class="form-entrar" action="usuario.php?fun=signup" method="POST" enctype="multipart/form-data">
+    <form class="" action="usuario.php?fun=signup" method="POST" enctype="multipart/form-data">
 
       <input class="input" type="text" name="nome" id="nome" placeholder="Nome" required/> <br>
       <input class="input" type="email" name="email" id="email" placeholder="E-mail" required/> <br>

@@ -24,7 +24,8 @@ if(isset($_GET["fun"])){
 		include_once("visao/paginas/erropage.html");		
 	}
 } else {
-	include_once("visao/paginas/home.php");
+	include_once("controle/atividade/ListAtividadeCards_class.php");
+	$pag = new ListAtividadeCards();
 }
 
 include_once("visao/rodape.php");

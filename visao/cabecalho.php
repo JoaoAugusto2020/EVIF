@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>EVIF</title>
+	<link rel="icon" type="image/x-icon" href="visao/img/logos/svg/favicon-EVIF-white.svg">
 
 	<!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -105,10 +106,11 @@
 							else
 								echo "<li><a class='dropdown-item' href='usuario.php?fun=signin'>Entrar/Registrar</a></li>";
 							?>
-							<li><a class="dropdown-item" href="usuario.php?fun=update">Configurações</a></li>
+							<li><a class="dropdown-item" href="usuario.php?fun=config">Configurações</a></li>
+							<!-- <li><a class="dropdown-item" href="solicitacao.php?fun=listUser">Solicitações</a></li> -->
 							<li><a class="dropdown-item" href="index.php?fun=sobre">Sobre nós</a></li>
-							<li><a class="dropdown-item" href="index.php?fun=prof">Área do Professor</a></li>
-							<li><a class="dropdown-item" href="index.php?fun=adm">Área Administrativa</a></li>
+							<li><a class='dropdown-item' href='index.php?fun=prof'>Área do Professor</a></li>
+							<li><a class='dropdown-item' href='index.php?fun=adm'>Área Administrativa</a></li>
 						</ul>
 					</div>
 				</div>

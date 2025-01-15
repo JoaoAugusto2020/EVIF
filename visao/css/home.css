@@ -57,7 +57,7 @@
 .card-body {
   background-color: #373435;
   color: white;
-  height: 100px;
+  height: auto;
   border-radius: 0px;
 }
 .info-row {
@@ -76,10 +76,18 @@
   flex: 1;
   border-radius: 0px;
 }
+.btn-info:hover, .btn-info:active {
+  background-color: #a2a2a2;
+  color: black;
+}
 .btn-inscricao {
   background-color: #2F9E41;
   color: white;
   border: none;
   flex: 1;
   border-radius: 0px;
+}
+.btn-inscricao:hover, .btn-inscricao:active {
+  background-color: #106d1f;
+  color: white;
 }

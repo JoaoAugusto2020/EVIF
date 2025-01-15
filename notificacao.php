@@ -7,24 +7,20 @@ if(isset($_GET["fun"])){
 	$fun = $_GET["fun"];
 	
 	if($fun == "create"){
-		protegerAdmin();
-		include_once("controle/curso/CreateCurso_class.php");
-		$pag = new CreateCurso();
+		include_once("controle/notificacoes/CreateNotificacoes_class.php");
+		//$pag = new CreateNotificacoes();
 
 	} else if($fun == "list"){
-		protegerAdmin();
-		include_once("controle/curso/ListCurso_class.php");
-		$pag = new ListCurso();
+		include_once("controle/notificacoes/ListNotificacoes_class.php");
+		//$pag = new ListNotificacoes();
 
 	} else if($fun == "update"){
-		protegerAdmin();
-		include_once("controle/curso/UpdateCurso_class.php");
-		$pag = new UpdateCurso();
+		include_once("controle/notificacoes/UpdateNotificacoes_class.php");
+		//$pag = new UpdateNotificacoes();
 
 	} else if($fun == "delete"){
-		protegerAdmin();
-		include_once("controle/curso/DeleteCurso_class.php");
-		$pag = new DeleteCurso();
+		include_once("controle/notificacoes/DeleteNotificacoes_class.php");
+		//$pag = new DeleteNotificacoes();
 
 	} else {
 		include_once("visao/paginas/erropage.html");		
