@@ -119,10 +119,34 @@ class SolicitacaoDAO{
 		}
 	}
 
+	//listar
+	public function listarUser($idusuario){
+		try{
+			$dados = $this->con->query("SELECT * FROM solicitacao WHERE idusuario='$idusuario'");
+			$lista = array(); //crio chamando função array()
+
+			foreach ($dados as $linha) {
+				//percorre linha a linha de dados e coloca cada registro
+				//na variável linha (que é um vetor)
+				$s = new Solicitacao();
+				$s->setIdsolicitacao($linha["idsolicitacao"]);
+				$s->setIdusuario($linha["idusuario"]);
+				$s->setNivel($linha["nivel"]);
+				$s->setStatus($linha["status"]);
+				$lista[] = $s;
+			}
+
+			return $lista;
+			
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
 	//exibir 
 	public function exibir($idsolicitacao){
 		try {
-			$lista = $this->con->query("SELECT * FROM idsolicitacao WHERE idsolicitacao = " . $idsolicitacao);
+			$lista = $this->con->query("SELECT * FROM solicitacao WHERE idsolicitacao = " . $idsolicitacao);
 			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
 
 			$solicitacao = new Solicitacao();

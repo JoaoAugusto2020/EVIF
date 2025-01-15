@@ -9,8 +9,12 @@ class CreateMatricula{
 		if (isset($_POST["enviar"])){
 			//enviar é o botão de submit
 
+			$u = new Usuario();
+			$daoU = new UsuarioDAO();
+			$u = $daoU->exibir($_SESSION['usuario']);
+
 			//em relação ao nível
-			if($_POST["nivel"] != 0){
+			if($u->getNivel()==0 && $_POST["nivel"]!=0){
 				//criar solicitação
 				$s = new Solicitacao();
 				$s->setIdusuario($_SESSION['usuario']);
@@ -19,10 +23,6 @@ class CreateMatricula{
 
 				$daoS = new SolicitacaoDAO();
 				$daoS->cadastrar($s);
-
-			}else{
-				$u = new Usuario();
-				$u->setNivel(0);
 			}
 
 			if(isset($_POST["curso"]) && $_POST["curso"] != -1){
@@ -38,7 +38,8 @@ class CreateMatricula{
 			echo "<script>javascript:history.go(-1);</script>";
 		} else {
 
-      include_once("visao/matricula/formCreateMatricula.php");
+			// ! FORMULÁRIO UNIDO AO formConfigUsuario.php
+      //include_once("visao/matricula/formCreateMatricula.php");
 		}
 	}
 }

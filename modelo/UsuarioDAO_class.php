@@ -102,6 +102,25 @@ class UsuarioDAO{
 		}
 	}
 
+	public function resetSenha($email, $novasenha){
+		try {
+			$stmt = $this->con->prepare(
+				"UPDATE usuario SET 
+				senha=:senha WHERE
+				email=:email"
+			);
+
+			$stmt->bindValue(":senha", $novasenha);
+			$stmt->bindValue(":email", $email);
+
+			$this->con->beginTransaction();
+			$stmt->execute(); //execução do SQL	
+			$this->con->commit();
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
 	//delete
 	public function excluir($usuario){
 		try {

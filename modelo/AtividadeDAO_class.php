@@ -37,7 +37,7 @@ class AtividadeDAO{
 			/*$this->con->close();
 				$this->con = null;*/
 
-			echo "<script>alert('Atividade criada com sucesso!');</script>";
+			//echo "<script>alert('Atividade criada com sucesso!');</script>";
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
@@ -52,7 +52,7 @@ class AtividadeDAO{
 				titulo=:titulo, 
 				professor=:professor,
         descricao=:descricao,
-        local=:local,
+				local=:local,
         datainicio=:datainicio,
         datafim=:datafim,
         aberto=:aberto WHERE
@@ -73,6 +73,8 @@ class AtividadeDAO{
 			$this->con->beginTransaction();
 			$stmt->execute(); //execução do SQL	
 			$this->con->commit();
+
+			echo "<script>alert('passou aqui');</script>";
 			/*$this->con->close();
 				$this->con = null;*/
 		} catch (PDOException $ex) {
@@ -138,10 +140,39 @@ class AtividadeDAO{
 		}
 	}
 
+	//listar Prof
+	public function listarProf($u){
+		try {
+			$nome = $u->getNome();
+			$dados = $this->con->query("SELECT * FROM atividade WHERE professor='$nome'");
+			$lista = array();
+			
+			foreach ($dados as $linha) {
+				//percorre linha a linha de dados e coloca cada registro
+				//na variável linha (que é um vetor)
+				$a = new Atividade();
+				$a->setIdatividade($linha["idatividade"]);
+        $a->setTipo($linha["tipo"]);
+				$a->setTitulo($linha["titulo"]);
+				$a->setProfessor($linha["professor"]);
+				$a->setDescricao($linha["descricao"]);
+				$a->setLocal($linha["local"]);
+				$a->setDatainicio($linha["datainicio"]);
+				$a->setDatafim($linha["datafim"]);
+				$a->setAberto($linha["aberto"]);
+				$lista[] = $a;
+			}
+			return $lista;
+			
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
 	//exibir 
 	public function exibir($idatividade){
 		try {
-			$lista = $this->con->query("SELECT * FROM atividade WHERE idatividade = " . $idatividade);
+			$lista = $this->con->query("SELECT * FROM atividade WHERE idatividade=".$idatividade);
 
 			/*$this->con->close();
 				$this->con = null;*/
@@ -160,6 +191,18 @@ class AtividadeDAO{
 			$a->setAberto($dado[0]["aberto"]);
 
 			return $a;
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
+	//exibir 
+	public function exibirTitulo($idatividade){
+		try {
+			$lista = $this->con->query("SELECT titulo FROM atividade WHERE idatividade=".$idatividade);
+			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
+
+			return $dado["titulo"];;
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}

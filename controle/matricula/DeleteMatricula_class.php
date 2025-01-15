@@ -21,7 +21,7 @@ class DeleteMatricula{
 
 			$m = new Matricula();
 			$m->setMatricula($_POST["delmatricula"]);
-
+			
 			include_once("visao/matricula/confirmDelete.php");
 		}
   }

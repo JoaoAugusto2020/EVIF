@@ -8,6 +8,7 @@ class UpdateCurso{
 			//enviar é o botão de submit
 
 			$c = new Curso();
+			$c->setIdcurso($_POST["id"]);
 			$c->setNome($_POST["nome"]);
 			$c->setPeriodos($_POST["periodos"]);
 

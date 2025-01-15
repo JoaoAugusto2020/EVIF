@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 14-Jan-2025 às 11:34
+-- Generation Time: 15-Jan-2025 às 03:08
 -- Versão do servidor: 5.7.25
 -- versão do PHP: 7.1.26
 
@@ -29,6 +29,9 @@ USE `bd_evif`;
 --
 -- Estrutura da tabela `abertocursos`
 --
+-- Criação: 14-Jan-2025 às 03:16
+-- Última actualização: 14-Jan-2025 às 20:49
+--
 
 DROP TABLE IF EXISTS `abertocursos`;
 CREATE TABLE `abertocursos` (
@@ -45,6 +48,9 @@ CREATE TABLE `abertocursos` (
 
 --
 -- Estrutura da tabela `atividade`
+--
+-- Criação: 07-Jan-2025 às 18:01
+-- Última actualização: 15-Jan-2025 às 02:54
 --
 
 DROP TABLE IF EXISTS `atividade`;
@@ -69,6 +75,9 @@ CREATE TABLE `atividade` (
 --
 -- Estrutura da tabela `curso`
 --
+-- Criação: 06-Jan-2025 às 17:00
+-- Última actualização: 14-Jan-2025 às 20:35
+--
 
 DROP TABLE IF EXISTS `curso`;
 CREATE TABLE `curso` (
@@ -86,9 +95,13 @@ CREATE TABLE `curso` (
 --
 -- Estrutura da tabela `inscricao`
 --
+-- Criação: 14-Jan-2025 às 17:58
+-- Última actualização: 15-Jan-2025 às 02:54
+--
 
 DROP TABLE IF EXISTS `inscricao`;
 CREATE TABLE `inscricao` (
+  `idinscricao` int(11) NOT NULL,
   `idatividade` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `datainscricao` datetime DEFAULT CURRENT_TIMESTAMP
@@ -96,16 +109,15 @@ CREATE TABLE `inscricao` (
 
 --
 -- RELATIONSHIPS FOR TABLE `inscricao`:
---   `idatividade`
---       `atividade` -> `idatividade`
---   `idusuario`
---       `usuario` -> `idusuario`
 --
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `matricula`
+--
+-- Criação: 14-Jan-2025 às 00:22
+-- Última actualização: 15-Jan-2025 às 02:55
 --
 
 DROP TABLE IF EXISTS `matricula`;
@@ -122,27 +134,10 @@ CREATE TABLE `matricula` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `notificacao`
---
-
-DROP TABLE IF EXISTS `notificacao`;
-CREATE TABLE `notificacao` (
-  `idnotificacao` int(11) NOT NULL,
-  `idusuario` int(11) NOT NULL,
-  `texto` text NOT NULL,
-  `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- RELATIONSHIPS FOR TABLE `notificacao`:
---   `idusuario`
---       `usuario` -> `idusuario`
---
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `solicitacao`
+--
+-- Criação: 13-Jan-2025 às 17:45
+-- Última actualização: 15-Jan-2025 às 02:55
 --
 
 DROP TABLE IF EXISTS `solicitacao`;
@@ -163,6 +158,9 @@ CREATE TABLE `solicitacao` (
 
 --
 -- Estrutura da tabela `usuario`
+--
+-- Criação: 07-Jan-2025 às 23:52
+-- Última actualização: 15-Jan-2025 às 02:55
 --
 
 DROP TABLE IF EXISTS `usuario`;
@@ -185,9 +183,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusuario`, `nome`, `email`, `senha`, `nivel`, `datacriacao`) VALUES
 (4, 'João Augusto Marciano Silva', 'joao@gmail.com', '123', 0, '2025-01-07 16:46:07'),
-(7, 'admin', 'admin@gmail.com', 'admin', 1, '2025-01-07 20:55:23'),
+(7, 'admin', 'admin@gmail.com', '123', 1, '2025-01-07 20:55:23'),
 (8, 'prof', 'prof@gmail.com', 'prof', 2, '2025-01-14 01:09:17'),
-(9, 'aluno', 'aluno@gmail.com', 'aluno', 0, '2025-01-14 01:10:14');
+(9, 'aluno', 'aluno@gmail.com', 'aluno', 3, '2025-01-14 01:10:14');
 
 --
 -- Indexes for dumped tables
@@ -215,21 +213,13 @@ ALTER TABLE `curso`
 -- Indexes for table `inscricao`
 --
 ALTER TABLE `inscricao`
-  ADD PRIMARY KEY (`idatividade`,`idusuario`),
-  ADD KEY `inscricao_ibfk_2` (`idusuario`);
+  ADD PRIMARY KEY (`idinscricao`);
 
 --
 -- Indexes for table `matricula`
 --
 ALTER TABLE `matricula`
   ADD PRIMARY KEY (`matricula`);
-
---
--- Indexes for table `notificacao`
---
-ALTER TABLE `notificacao`
-  ADD PRIMARY KEY (`idnotificacao`),
-  ADD KEY `fk_idusuario_notificacao` (`idusuario`);
 
 --
 -- Indexes for table `solicitacao`
@@ -267,10 +257,10 @@ ALTER TABLE `curso`
   MODIFY `idcurso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `notificacao`
+-- AUTO_INCREMENT for table `inscricao`
 --
-ALTER TABLE `notificacao`
-  MODIFY `idnotificacao` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `inscricao`
+  MODIFY `idinscricao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `solicitacao`
@@ -282,24 +272,11 @@ ALTER TABLE `solicitacao`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `inscricao`
---
-ALTER TABLE `inscricao`
-  ADD CONSTRAINT `inscricao_ibfk_1` FOREIGN KEY (`idatividade`) REFERENCES `atividade` (`idatividade`) ON DELETE CASCADE,
-  ADD CONSTRAINT `inscricao_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE;
-
---
--- Limitadores para a tabela `notificacao`
---
-ALTER TABLE `notificacao`
-  ADD CONSTRAINT `fk_idusuario_notificacao` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `solicitacao`

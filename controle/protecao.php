@@ -31,7 +31,7 @@ if(!function_exists("protegerProf")){
       if(!($u->getNivel()==1 || $u->getNivel()==2)){
         echo '<script>'; 
         echo 'alert("Página restrita à professores! Se você for um professor, solicite o perfil de professor nas configurações.");'; 
-        echo 'window.location.href = "usuario.php?fun=update";';
+        echo 'window.location.href = "usuario.php?fun=config";';
         echo '</script>';
       }
     }

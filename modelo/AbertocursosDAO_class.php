@@ -65,7 +65,8 @@ class AbertocursosDAO{
 	//excluir
 	public function excluir($abertocursos){
 		try {
-			$num = $this->con->exec("DELETE FROM abertocursos WHERE idatividadecurso = " .$abertocursos->getIdatividadecurso());
+			$titulo = $abertocursos->getTitulo();
+			$num = $this->con->exec("DELETE FROM abertocursos WHERE titulo='$titulo'");
 			//numero de linhas afetadas pelo comando
 
 			if ($num >= 1) {

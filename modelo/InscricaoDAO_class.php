@@ -21,16 +21,15 @@ class InscricaoDAO{
 				"INSERT INTO inscricao(idatividade, idusuario)
 				VALUES (:idatividade, :idusuario)"
 			);
-			//:inscricao - é uma âncora e será ligado pelo bindValue
-			//SQL injection
-			//ligamos as âncoras aos valores de veiculo
+
 			$stmt->bindValue(":idatividade", $inscricao->getIdatividade());
 			$stmt->bindValue(":idusuario", $inscricao->getIdusuario());
-			//$stmt->bindValue(":datainscricao", $inscricao->getDatainscricao());
 
+			$this->con->beginTransaction();
 			$stmt->execute(); //execução do SQL	
-			/*$this->con->close();
-				$this->con = null;*/
+			$this->con->commit();
+
+			echo "<script>alert('Inscrição realizada com sucesso!')</script>";
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}
@@ -63,7 +62,7 @@ class InscricaoDAO{
 	//excluir
 	public function excluir($inscricao){
 		try {
-			$num = $this->con->exec("DELETE FROM inscricao WHERE idatividade = " .$inscricao->getIdatividade(). " AND idusuario = " .$inscricao->getIdusuario());
+			$num = $this->con->exec("DELETE FROM inscricao WHERE idinscricao =".$inscricao->getIdinscricao());
 			//numero de linhas afetadas pelo comando
 
 			if ($num >= 1) {
@@ -77,33 +76,24 @@ class InscricaoDAO{
 	}
 
 	//listar
-	public function listar($query = null){
-		//se não recebe parâmetro (ou seja, uma consulto personalizada)
-		//$query recebe nulo
+	public function listar(){
 		try {
-			if ($query == null) {
-				$dados = $this->con->query("SELECT * FROM inscricao");
-				//dataset (conjunto de dados) com todos os dados
-				//query() é função PDO, executa SQL
-			} else {
-				$dados = $this->con->query($query);
-				//se listar receber parâmetro este será uma SQL 
-				//SQL específica
-			}
+			$dados = $this->con->query("SELECT * FROM inscricao");
 			$lista = array(); //crio chamando função array()
 
 			/*for($i = 0; $i<$dados.lenght; $i++){
-				$a->setinscricao($dados[i][1]);
+				$i->setinscricao($dados[i][1]);
 			}*/
 			
 			foreach ($dados as $linha) {
 				//percorre linha a linha de dados e coloca cada registro
 				//na variável linha (que é um vetor)
-				$a = new Inscricao();
-				$a->setIdatividade($linha["idatividade"]);
-        $a->setIdusuario($linha["idusuario"]);
-				$a->setDatainscricao($linha["datainscricao"]);
-				$lista[] = $a;
+				$i = new Inscricao();
+				$i->setIdinscricao($linha["idinscricao"]);
+				$i->setIdatividade($linha["idatividade"]);
+        $i->setIdusuario($linha["idusuario"]);
+				$i->setDatainscricao($linha["datainscricao"]);
+				$lista[] = $i;
 			}
 			return $lista;
 			
@@ -112,22 +102,71 @@ class InscricaoDAO{
 		}
 	}
 
-	//exibir 
-	public function exibir($idatividade, $idusuario){
+	//listar User
+	public function listarUser($idusuario){
 		try {
-			$lista = $this->con->query("SELECT * FROM inscricao WHERE idatividade = " .$idatividade. " AND idusuario = " .$idusuario);
+			$dados = $this->con->query("SELECT * FROM inscricao WHERE idusuario='$idusuario'");
+			$lista = array(); //crio chamando função array()
+
+			foreach ($dados as $linha) {
+				//percorre linha a linha de dados e coloca cada registro
+				//na variável linha (que é um vetor)
+				$i = new Inscricao();
+				$i->setIdinscricao($linha["idinscricao"]);
+				$i->setIdusuario($linha["idusuario"]);
+				$i->setIdatividade($linha["idatividade"]);
+				$i->setDatainscricao($linha["datainscricao"]);
+				$lista[] = $i;
+			}
+
+			return $lista;
+			
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
+	//listar Ativ
+	public function listarAtiv($idatividade){
+		try {
+			$dados = $this->con->query("SELECT * FROM inscricao WHERE idatividade='$idatividade'");
+			$lista = array(); //crio chamando função array()
+
+			foreach ($dados as $linha) {
+				//percorre linha a linha de dados e coloca cada registro
+				//na variável linha (que é um vetor)
+				$i = new Inscricao();
+				$i->setIdinscricao($linha["idinscricao"]);
+				$i->setIdusuario($linha["idusuario"]);
+				$i->setIdatividade($linha["idatividade"]);
+				$i->setDatainscricao($linha["datainscricao"]);
+				$lista[] = $i;
+			}
+
+			return $lista;
+			
+		} catch (PDOException $ex) {
+			echo "Erro: " . $ex->getMessage();
+		}
+	}
+
+	//exibir 
+	public function exibir($idinscricao){
+		try {
+			$lista = $this->con->query("SELECT * FROM inscricao WHERE idinscricao='$idinscricao'");
 
 			/*$this->con->close();
 				$this->con = null;*/
 
 			$dado = $lista->fetchAll(PDO::FETCH_ASSOC);
 
-			$a = new Inscricao();
-			$a->setIdatividade($dado[0]["idatividade"]);
-			$a->setIdusuario($dado[0]["idusuario"]);
-			$a->setDatainscricao($dado[0]["datainscricao"]);
+			$i = new Inscricao();
+			$i->setIdinscricao($dado[0]["idinscricao"]);
+			$i->setIdatividade($dado[0]["idatividade"]);
+			$i->setIdusuario($dado[0]["idusuario"]);
+			$i->setDatainscricao($dado[0]["datainscricao"]);
 
-			return $a;
+			return $i;
 		} catch (PDOException $ex) {
 			echo "Erro: " . $ex->getMessage();
 		}

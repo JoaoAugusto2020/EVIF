@@ -1,39 +1,50 @@
 <?php
 class Inscricao {
   //classe entidade	
+  private $idinscricao;
   private $idatividade;
   private $idusuario;
   private $datainscricao;
 
 	public function __construct() {}
-  
-  public function getIdatividade(){
-    return $this->idatividade;
-  }
+    
+    public function getIdinscricao(){
+        return $this->idinscricao;
+    }
 
-  public function setIdatividade($idatividade){
-    $this->idatividade = $idatividade;
+    public function setIdinscricao($idinscricao){
+        $this->idinscricao = $idinscricao;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  public function getIdusuario(){
-    return $this->idusuario;
-  }
+    public function getIdatividade(){
+        return $this->idatividade;
+    }
 
-  public function setIdusuario($idusuario){
-    $this->idusuario = $idusuario;
+    public function setIdatividade($idatividade){
+        $this->idatividade = $idatividade;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  public function getDatainscricao(){
-    return $this->datainscricao;
-  }
+    public function getIdusuario(){
+        return $this->idusuario;
+    }
 
-  public function setDatainscricao($datainscricao){
-    $this->datainscricao = $datainscricao;
+    public function setIdusuario($idusuario){
+        $this->idusuario = $idusuario;
 
-    return $this;
-  }
+        return $this;
+    }
+
+    public function getDatainscricao(){
+        return $this->datainscricao;
+    }
+
+    public function setDatainscricao($datainscricao){
+        $this->datainscricao = $datainscricao;
+
+        return $this;
+    }
 }
