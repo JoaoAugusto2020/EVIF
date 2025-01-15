@@ -8,7 +8,7 @@
       <input class="input" type="text" name="email" placeholder="E-mail" required> <br>
 
       <div class="input-senha mb-1">
-          <input type="password" name="senha" id="senha" placeholder="Senha" required/>
+          <input type="password" name="senha" id="senha" placeholder="Senha"/>
           <img src="visao/img/icones/olho-aberto.png" id="olho" alt="olho">
       </div>
       

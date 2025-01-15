@@ -15,6 +15,7 @@
         <th> Data de início </th>
         <th> Data de encerramento </th>
         <th> Aberto? </th>
+        <th> Inscrições </th>
         <th> Editar </th>
         <th> Excluir </th>
       </tr>
@@ -33,7 +34,9 @@
           echo "<td>" .$a->getDatainicio(). "</td>";
           echo "<td>" .$a->getDatafim(). "</td>";
           echo "<td>" .$a->getAberto(). "</td>";
-
+          
+          echo "<td><a href=inscricao.php?fun=listProf&id=" .$a->getIdatividade(). ">Inscrições</a></td>";
+          
           echo "<td><a href=atividade.php?fun=update&id=" .$a->getIdatividade(). "><img src='visao/img/icones/update.png' width='30px'/> </a></td>";
           echo "<td><a href=atividade.php?fun=delete&id=" .$a->getIdatividade(). "><img src='visao/img/icones/delete.png' width='30px' /></a></td>";
 
@@ -42,3 +45,4 @@
       ?>
     </table>
   </div>
+  <p class='text-center'><a class='link' href='index.php?fun=prof'>Voltar Prof</a></p>

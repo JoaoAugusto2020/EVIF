@@ -58,8 +58,8 @@
 
           <!-- botões -->
           <div class="card-footer">
-            <a class="btn btn-info" href="atividade.php?fun=exibir&id='<?php echo $a->getIdatividade(); ?>'">Mais informações</a>
-            <a class="btn btn-inscricao" href="atividade.php?fun=inscrever&id='<?php echo $_SESSION['usuario'] ?>'">Inscrever-se</a>
+            <a class="btn btn-info" href="atividade.php?fun=exibir&id=<?php echo $a->getIdatividade(); ?>">Mais informações</a>
+            <a class="btn btn-inscricao" href="inscricao.php?fun=create&id=<?php echo $a->getIdatividade(); ?>">Inscrever-se</a>
           </div>
         </div>
       </div>
@@ -97,8 +97,8 @@
 
           <!-- botões -->
           <div class="card-footer">
-            <a class="btn btn-info" href="atividade.php?fun=exibir&id='<?php echo $a->getIdatividade(); ?>'">Mais informações</a>
-            <a class="btn btn-inscricao" href="atividade.php?fun=inscrever&id='<?php echo $_SESSION['usuario'] ?>'">Inscrever-se</a>
+            <a class="btn btn-info" href="atividade.php?fun=exibir&id=<?php echo $a->getIdatividade() ?>">Mais informações</a>
+            <a class="btn btn-inscricao" href="inscricao.php?fun=create&id=<?php echo $a->getIdatividade() ?>">Inscrever-se</a>
           </div>
         </div>
       </div>

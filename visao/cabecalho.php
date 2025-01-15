@@ -41,7 +41,7 @@
 
 					<!-- Publicações -->
 					<div class="nav-item">
-						<a class="link-claro" href="#">
+						<a class="link-claro" href="index.php">
 							<i><svg xmlns="http://www.w3.org/2000/svg" class="nav-svg bi bi-calendar-event-fill" fill="currentColor"
 									viewBox="0 0 16 16">
 									<path
@@ -53,7 +53,7 @@
 
 					<!-- Minhas Inscrições -->
 					<div class="nav-item">
-						<a class="link-claro" href="#">
+						<a class="link-claro" href="inscricao.php?fun=listUser">
 							<i><svg xmlns="http://www.w3.org/2000/svg" class="nav-svg bi bi-clipboard-check-fill"
 									fill="currentColor" viewBox="0 0 16 16">
 									<path

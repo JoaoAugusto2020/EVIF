@@ -21,7 +21,7 @@ if(isset($_GET["fun"])){
 
 	} else if($fun == "resetSenha"){
 		include_once("controle/usuario/ResetSenhaUsuario_class.php");
-		//$pag = new ResetSenhaUsuario();
+		$pag = new ResetSenhaUsuario();
 
 	} else if($fun == "updateSenha"){
 		proteger();
